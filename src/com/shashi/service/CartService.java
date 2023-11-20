@@ -6,7 +6,7 @@ import com.shashi.beans.CartBean;
 
 public interface CartService {
 
-	public String addProductToCart(String userId, String prodId, int prodQty);
+	public String addProductToCart(String userId, String prodId, int prodQty, boolean used);
 
 	public String updateProductToCart(String userId, String prodId, int prodQty);
 

@@ -45,7 +45,7 @@
 			//Add Product into the cart
 			cartQty += 1;
 			if (cartQty <= avail) {
-		cart.addProductToCart(uid, pid, 1);
+		cart.addProductToCart(uid, pid, 1, false);
 			} else {
 		response.sendRedirect("./AddtoCart?pid=" + pid + "&pqty=" + cartQty);
 			}

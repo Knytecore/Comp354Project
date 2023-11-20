@@ -9,10 +9,9 @@ public class CartBean implements Serializable {
 	}
 
 	public String userId;
-
 	public String prodId;
-
 	public int quantity;
+	public boolean used;
 
 	public String getUserId() {
 		return userId;
@@ -37,12 +36,31 @@ public class CartBean implements Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public boolean isUsed() {
+		return used;
+	}
 
+	public void setUsed(boolean used) {
+		this.used = used;
+	}
+	
 	public CartBean(String userId, String prodId, int quantity) {
 		super();
 		this.userId = userId;
 		this.prodId = prodId;
 		this.quantity = quantity;
+		this.used = false;
 	}
+	
+	public CartBean(String userId, String prodId, int quantity, boolean used) {
+		super();
+		this.userId = userId;
+		this.prodId = prodId;
+		this.quantity = quantity;
+		this.used = used;
+	}
+	
+
 
 }
