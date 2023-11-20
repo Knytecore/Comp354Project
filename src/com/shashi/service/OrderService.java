@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shashi.beans.OrderBean;
 import com.shashi.beans.OrderDetails;
+import com.shashi.beans.ProductBean;
 import com.shashi.beans.TransactionBean;
 
 public interface OrderService {
@@ -23,4 +24,14 @@ public interface OrderService {
 	public List<OrderDetails> getAllOrderDetails(String userEmailId);
 
 	public String shipNow(String orderId, String prodId);
+	
+	public String getPreferenceByUser(String emailId);
+	
+	public List<ProductBean> getMostSellingItems();
+	
+	public List<ProductBean> getMostSellingItems(String type);
+	
+	public List<ProductBean> getLeastSellingItems();
+	
+	public List<ProductBean> getLeastSellingItems(String type);
 }
