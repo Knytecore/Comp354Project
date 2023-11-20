@@ -10,6 +10,7 @@ public class OrderBean implements Serializable {
 	private int quantity;
 	private Double amount;
 	private int shipped;
+	private boolean used;
 
 	public OrderBean() {
 		super();
@@ -22,7 +23,19 @@ public class OrderBean implements Serializable {
 		this.quantity = quantity;
 		this.amount = amount;
 		this.shipped = 0;
+		this.used = false;
 	}
+	
+	public OrderBean(String transactionId, String productId, int quantity, Double amount, Boolean used) {
+		super();
+		this.transactionId = transactionId;
+		this.productId = productId;
+		this.quantity = quantity;
+		this.amount = amount;
+		this.shipped = 0;
+		this.used = used;
+	}
+
 
 	public OrderBean(String transactionId, String productId, int quantity, Double amount, int shipped) {
 		super();
@@ -31,6 +44,17 @@ public class OrderBean implements Serializable {
 		this.quantity = quantity;
 		this.amount = amount;
 		this.shipped = shipped;
+		this.used = false;
+	}
+	
+	public OrderBean(String transactionId, String productId, int quantity, Double amount, int shipped, Boolean used) {
+		super();
+		this.transactionId = transactionId;
+		this.productId = productId;
+		this.quantity = quantity;
+		this.amount = amount;
+		this.shipped = shipped;
+		this.used = used;
 	}
 
 	public String getTransactionId() {
@@ -71,6 +95,14 @@ public class OrderBean implements Serializable {
 
 	public void setShipped(int shipped) {
 		this.shipped = shipped;
+	}
+
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 
 }
