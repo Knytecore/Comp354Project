@@ -16,7 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 
 	<%
 	/* Checking the user credentials */
@@ -63,7 +63,7 @@
 	<div class="text-center"
 		style="color: black; font-size: 14px; font-weight: bold;"><%=message%></div>
 	<!-- Start of Product Items List -->
-	<div class="container" style="background-color: #E6F9E6;">
+	<div class="container" style="background-color: #FFFFFF;">
 		<div class="row text-center">
 
 			<%
@@ -73,14 +73,14 @@
 				<div class="thumbnail">
 					<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product"
 						style="height: 150px; max-width: 180px;">
-					<p class="productname"><%=product.getProdName()%>
+					<p class="productname" style="font-family:Arial,Helvetica,sans-serif;color:black;font-weight:bold"><%=product.getProdName()%>
 						(
 						<%=product.getProdId()%>
 						)
 					</p>
 					<p class="productinfo"><%=product.getProdInfo()%></p>
-					<p class="price">
-						Rs
+					<p class="price" style="color:black; font-size: 15px">
+						$CAD
 						<%=product.getProdPrice()%>
 					</p>
 					<form method="post">

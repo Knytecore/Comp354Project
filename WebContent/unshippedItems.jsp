@@ -17,7 +17,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/changes.css">
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 	<%
 	/* Checking the user credentials */
 	String userType = (String) session.getAttribute("usertype");
@@ -39,13 +39,13 @@
 	<jsp:include page="header.jsp" />
 
 	<div class="text-center"
-		style="color: green; font-size: 24px; font-weight: bold;">UnShipped
+		style="color: black; font-size: 24px; font-weight: bold;">UnShipped
 		Orders</div>
 	<div class="container-fluid">
 		<div class="table-responsive ">
 			<table class="table table-hover table-sm">
 				<thead
-					style="background-color: #700fb7; color: white; font-size: 16px;">
+					style="background-color: #912238; color: white; font-size: 16px;">
 					<tr>
 						<th>TransactionId</th>
 						<th>ProductId</th>
@@ -84,7 +84,7 @@
 						<td>READY_TO_SHIP</td>
 						<td><a
 							href="ShipmentServlet?orderid=<%=order.getTransactionId()%>&amount=<%=order.getAmount()%>&userid=<%=userId%>&prodid=<%=order.getProductId()%>"
-							class="btn btn-success">SHIP NOW</a></td>
+							class="btn btn-success" style="background-color:#912238;">SHIP NOW</a></td>
 					</tr>
 
 					<%

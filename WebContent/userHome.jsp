@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ellison Electronics</title>
+<title>Home Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -16,7 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 
 	<%
 	/* Checking the user credentials */
@@ -69,7 +69,7 @@
 				<div class="thumbnail">
 					<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product"
 						style="height: 150px; max-width: 180px">
-					<p class="productname"><%=product.getProdName()%>
+					<p style="color:black;font-family:Arial,Helvetica,sans-serif; font-weight:bold;" class="productname"><%=product.getProdName()%>
 					</p>
 					<%
 					String description = product.getProdInfo();
@@ -77,8 +77,8 @@
 					%>
 					<p class="productinfo"><%=description%>..
 					</p>
-					<p class="price">
-						Rs
+					<p style="color:black;font-size:15px;" class="price">
+						$CAD
 						<%=product.getProdPrice()%>
 					</p>
 					<form method="post">
