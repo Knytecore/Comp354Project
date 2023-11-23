@@ -14,7 +14,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/changes.css">
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 	<%
 	/* Checking the user credentials */
 	String userType = (String) session.getAttribute("usertype");
@@ -46,11 +46,11 @@
 				enctype="multipart/form-data" class="col-md-6 col-md-offset-3"
 				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
-					<h2 style="color: green;">Product Addition Form</h2>
+					<h2 style="color: black;">Product Addition Form</h2>
 					<%
 					if (message != null) {
 					%>
-					<p style="color: blue;">
+					<p style="color: black;">
 						<%=message%>
 					</p>
 					<%
@@ -105,7 +105,7 @@
 						<button type="reset" class="btn btn-danger">Reset</button>
 					</div>
 					<div class="col-md-6 text-center">
-						<button type="submit" class="btn btn-success">Add Product</button>
+						<button type="submit" class="btn btn-success" style="background-color:#912238;">Add Product</button>
 					</div>
 				</div>
 			</form>

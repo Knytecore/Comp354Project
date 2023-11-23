@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login</title>
+<title>Concordia Cart App Login Page</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/changes.css">
@@ -12,7 +12,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 
 	<%@ include file="header.jsp"%>
 
@@ -26,7 +26,7 @@
 				class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2"
 				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
-					<h2 style="color: green;">Login Form</h2>
+					<h2 style="color: black;">Login Form</h2>
 					<%
 					if (message != null) {
 					%>
@@ -63,7 +63,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<button type="submit" class="btn btn-success">Login</button>
+						<button  type="submit" class="btn btn-success" style="background-color:#912238;border-color:black;">Login</button>
 					</div>
 				</div>
 			</form>

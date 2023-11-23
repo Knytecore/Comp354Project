@@ -18,12 +18,12 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 	<!--Company Header Starting  -->
 	<div class="container-fluid text-center"
-		style="margin-top: 45px; background-color: #33cc33; color: white; padding: 5px;">
-		<h2>Ellison Electronics</h2>
-		<h6>We specialize in Electronics</h6>
+		style="margin-top: 45px; background-color: #912238; color: white; padding: 5px;">
+		<h2>Concordia Cart App</h2>
+		<h6>Find Everything you need for your studies!</h6>
 		<form class="form-inline" action="index.jsp" method="get">
 			<div class="input-group">
 				<input type="text" class="form-control" size="50" name="search"
@@ -34,7 +34,7 @@
 			</div>
 		</form>
 		<p align="center"
-			style="color: blue; font-weight: bold; margin-top: 5px; margin-bottom: 5px;"
+			style="color: weight; font-weight: bold; margin-top: 5px; margin-bottom: 5px;"
 			id="message"></p>
 	</div>
 	<!-- Company Header Ending -->
@@ -98,7 +98,7 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="userHome.jsp"><span
-							class="glyphicon glyphicon-home">Products</span></a></li>
+							class="glyphicon" style="font-family:Arial,Helvetica,sans-serif;font-size: 15px;font-weight: 500;">Products</span></a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">Category <span class="caret"></span>
 					</a>

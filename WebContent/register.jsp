@@ -12,7 +12,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 
 	<%@ include file="header.jsp"%>
 	<%
@@ -26,7 +26,7 @@
 				class="col-md-6 col-md-offset-3"
 				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
-					<h2 style="color: green;">Registration Form</h2>
+					<h2 style="color: black;">Registration Form</h2>
 					<%
 					if (message != null) {
 					%>
@@ -85,7 +85,7 @@
 						<button type="Reset" class="btn btn-danger">Reset</button>
 					</div>
 					<div class="col-md-6">
-						<button type="submit" class="btn btn-success">Register</button>
+						<button type="submit" class="btn btn-success" style="background-color:#912238;border-color:black;">Register</button>
 					</div>
 				</div>
 			</form>
