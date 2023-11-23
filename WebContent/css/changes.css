@@ -176,3 +176,28 @@ i {
 i.fa::before {
 	font-size: 3rem !important;
 }
+
+.ribbon {
+  width: 60px;
+  font-size: 12px;
+  padding: 5px;
+  position: relative;
+  right: 0%;
+  top: -2px;
+  text-align: center;
+  border-radius: 25px;
+  background-color: rgb(34, 139, 34);
+  color: white;
+}
+.newRibbon {
+  width: 60px;
+  font-size: 12px;
+  padding: 5px;
+  position: relative;
+  right: 0%;
+  top: -2px;
+  text-align: center;
+  border-radius: 25px;
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
