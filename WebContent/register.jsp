@@ -24,7 +24,7 @@
 
 			<form action="./RegisterSrv" method="post"
 				class="col-md-6 col-md-offset-3"
-				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
+				style="border: 2px solid black; border-radius: 10px; background-color: #d3d3d3; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
 					<h2 style="color: black;">Registration Form</h2>
 					<%
