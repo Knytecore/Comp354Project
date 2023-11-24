@@ -71,8 +71,12 @@
 				<div class="thumbnail">
 					<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product"
 						style="height: 150px; max-width: 180px">
+<<<<<<< FronEnd-changes-with-add-used-product
 					<p style="color: black; font-family: Arial, Helvetica, sans-serif"
 						class="productname"><%=product.getProdName()%>
+=======
+					<p style="color:black;font-family:Arial,Helvetica,sans-serif; font-weight:bold;" class="productname"><%=product.getProdName()%>
+>>>>>>> main
 					</p>
 					<%
 					String description = product.getProdInfo();

@@ -148,7 +148,7 @@
 								style="background-color: black; color: white;">Cancel</button>
 						</form></td>
 					<td colspan="2" align="center"><form method="post">
-							<button style="background-color: #912238; width:200px; color: white;"
+							<button style="background-color: #d3d3d3; width:200px; color: white;"
 								formaction="payment.jsp?amount=<%=totAmount%>">Pay Now</button>
 						</form></td>
 
