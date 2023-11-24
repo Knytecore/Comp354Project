@@ -83,7 +83,7 @@
 						$CAD
 						<%=product.getProdPrice()%>
 					</p>
-					<form style="background-color:#d3d3d3;" method="post">
+					<form style="background-color:#FFFFFF;" method="post">
 						<button type="submit"
 							formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>"
 							class="btn btn-danger">Remove Product</button>
