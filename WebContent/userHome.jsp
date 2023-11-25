@@ -63,7 +63,7 @@
 
 			<%
 			for (ProductBean product : products) {
-				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
+				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 			%>
 			<div class="col-sm-4" style='height: 350px;'>
 				<div class="thumbnail">

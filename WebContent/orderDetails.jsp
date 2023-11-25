@@ -51,6 +51,7 @@
 					<tr>
 						<th>Picture</th>
 						<th>ProductName</th>
+						<th>Condition</th>
 						<th>OrderId</th>
 						<th>Quantity</th>
 						<th>Price</th>
@@ -68,6 +69,7 @@
 						<td><img src="./ShowImage?pid=<%=order.getProductId()%>"
 							style="width: 50px; height: 50px;"></td>
 						<td><%=order.getProdName()%></td>
+						<td><%=(order.isUsed()? "Used" : "New")%></td>
 						<td><%=order.getOrderId()%></td>
 						<td><%=order.getQty()%></td>
 						<td><%=order.getAmount()%></td>
