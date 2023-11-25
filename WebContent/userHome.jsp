@@ -79,7 +79,7 @@
 					<p class="productinfo"><%=description%>..
 					</p>
 					<p style="color: black; font-size: 15px;" class="price">
-						<span class="newRibbon">NEW</span>$CAD$CAD
+						<span class="newRibbon">NEW</span>$CAD
 						<%=product.getProdPrice()%>
 						<%
 						if (product.getProdUsedQuantity() > 0) {

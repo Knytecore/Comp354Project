@@ -51,13 +51,13 @@
 					<div class="form-group">
 						<img src="./ShowImage?pid=<%=product.getProdId()%>"
 							alt="Product Image" height="100px" />
-						<h2 style="color: green;">Product Update Form</h2>
+						<h2 style="color: black;">Product Update Form</h2>
 					</div>
 
 					<%
 					if (message != null) {
 					%>
-					<p style="color: blue;">
+					<p style="color: black;">
 						<%=message%>
 					</p>
 					<%
@@ -116,13 +116,19 @@
 							placeholder="Enter Stock Quantity" class="form-control"
 							id="last_name" name="quantity" required>
 					</div>
+					<div class="col-md-6 form-group">
+						<label for="last_name">Used Quantity</label> <input type="number"
+							value="<%=product.getProdUsedQuantity()%>"
+							placeholder="Enter Used Quantity" class="form-control"
+							id="last_name" name="used" required>
+					</div>
 				</div>
 				<div class="row text-center">
 					<div class="col-md-4" style="margin-bottom: 2px;">
 						<button formaction="adminViewProduct.jsp" class="btn btn-danger">Cancel</button>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" class="btn btn-success">Update
+						<button type="submit" class="btn btn-success" style="background-color:#912238;">Update
 							Product</button>
 					</div>
 				</div>
