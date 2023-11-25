@@ -378,7 +378,7 @@ public class CartServiceImpl implements CartService {
 
 		PreparedStatement ps = null;
 
-		ResultSet rs = null;
+		ResultSet rs = null; 
 
 		try {
 			ps = con.prepareStatement("select quantity from usercart where username=? and prodid=? and used=?");
