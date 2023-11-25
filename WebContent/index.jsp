@@ -64,7 +64,7 @@
 
 			<%
 			for (ProductBean product : products) {
-				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
+				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 			%>
 			<div class="col-sm-4" style='height: 350px;'>
 				<div class="thumbnail">
@@ -87,11 +87,11 @@
 						if (cartQty == 0) {
 						%>
 						<button type="submit"
-							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=false"
 							class="btn btn-success">Add to Cart</button>
 						&nbsp;&nbsp;&nbsp;
 						<button type="submit"
-							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1used=true"
 							class="btn btn-primary">Buy Now</button>
 						<%
 						} else {

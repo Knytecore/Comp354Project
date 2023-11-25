@@ -45,16 +45,22 @@ public class AddtoCart extends HttpServlet {
 		String userId = userName;
 		String prodId = request.getParameter("pid");
 		int pQty = Integer.parseInt(request.getParameter("pqty")); // 1
+		boolean used = Boolean.parseBoolean(request.getParameter("used"));
 
 		CartServiceImpl cart = new CartServiceImpl();
 
 		ProductServiceImpl productDao = new ProductServiceImpl();
 
 		ProductBean product = productDao.getProductDetails(prodId);
-
-		int availableQty = product.getProdQuantity();
-
-		int cartQty = cart.getProductCount(userId, prodId);
+		
+		int availableQty; 
+		if (used) {
+			availableQty = product.getProdUsedQuantity();
+		} else {
+			availableQty = product.getProdQuantity();
+		}
+		
+		int cartQty = cart.getProductCount(userId, prodId, used);
 
 		pQty += cartQty;
 
@@ -62,7 +68,7 @@ public class AddtoCart extends HttpServlet {
 
 		response.setContentType("text/html");
 		if (pQty == cartQty) {
-			String status = cart.removeProductFromCart(userId, prodId);
+			String status = cart.removeProductFromCart(userId, prodId, used);
 
 			RequestDispatcher rd = request.getRequestDispatcher("userHome.jsp");
 
@@ -77,22 +83,24 @@ public class AddtoCart extends HttpServlet {
 				status = "Product is Out of Stock!";
 			} else {
 
-				cart.updateProductToCart(userId, prodId, availableQty);
+				cart.updateProductToCart(userId, prodId, availableQty, used);
 
 				status = "Only " + availableQty + " no of " + product.getProdName()
 						+ " are available in the shop! So we are adding only " + availableQty
 						+ " products into Your Cart" + "";
 			}
-			DemandBean demandBean = new DemandBean(userName, product.getProdId(), pQty - availableQty);
-
-			DemandServiceImpl demand = new DemandServiceImpl();
-
-			boolean flag = demand.addProduct(demandBean);
-
-			if (flag)
-				status += "<br/>Later, We Will Mail You when " + product.getProdName()
-						+ " will be available into the Store!";
-
+			
+			if (!used) {
+				DemandBean demandBean = new DemandBean(userName, product.getProdId(), pQty - availableQty);
+	
+				DemandServiceImpl demand = new DemandServiceImpl();
+	
+				boolean flag = demand.addProduct(demandBean);
+						
+				if (flag)
+					status += "<br/>Later, We Will Mail You when " + product.getProdName()
+							+ " will be available into the Store!";
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("cartDetails.jsp");
 
 			rd.include(request, response);
@@ -100,7 +108,7 @@ public class AddtoCart extends HttpServlet {
 			pw.println("<script>document.getElementById('message').innerHTML='" + status + "'</script>");
 
 		} else {
-			String status = cart.updateProductToCart(userId, prodId, pQty);
+			String status = cart.updateProductToCart(userId, prodId, pQty, used);
 
 			RequestDispatcher rd = request.getRequestDispatcher("userHome.jsp");
 
