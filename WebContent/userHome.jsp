@@ -77,8 +77,13 @@
 					%>
 					<p class="productinfo"><%=description%>..
 					</p>
+
+					<p style="color: black; font-size: 15px;" class="price">
+						<span class="newRibbon">NEW</span>$CAD
+
 					<p style="color:black;font-size:15px;" class="price">
 						$CAD
+
 						<%=product.getProdPrice()%>
 					</p>
 					<form method="post">
