@@ -435,7 +435,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int getCartItemCount(String userId, String itemId, Boolean used) {
+	public int getCartItemCount(String userId, String itemId) {
 		
 		int count = 0;
 		if (userId == null || itemId == null)
@@ -447,11 +447,10 @@ public class CartServiceImpl implements CartService {
 		ResultSet rs = null;
 
 		try {
-			ps = con.prepareStatement("select quantity from usercart where username=? and prodid=? and used=?");
+			ps = con.prepareStatement("select quantity from usercart where username=? and prodid=?");
 
 			ps.setString(1, userId);
 			ps.setString(2, itemId);
-			ps.setBoolean(3, used);
 			
 			rs = ps.executeQuery();
 
