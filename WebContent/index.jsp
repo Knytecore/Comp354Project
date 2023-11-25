@@ -64,13 +64,19 @@
 
 			<%
 			for (ProductBean product : products) {
-				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
+				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
+				int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
 			%>
 			<div class="col-sm-4" style='height: 350px;'>
 				<div class="thumbnail">
 					<img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product"
 						style="height: 150px; max-width: 180px">
-					<p style="color:black;font-family:Arial,Helvetica,sans-serif" class="productname"><%=product.getProdName()%>
+<<<<<<< FronEnd-changes-with-add-used-product
+					<p style="color: black; font-family: Arial, Helvetica, sans-serif"
+						class="productname"><%=product.getProdName()%>
+=======
+					<p style="color:black;font-family:Arial,Helvetica,sans-serif; font-weight:bold;" class="productname"><%=product.getProdName()%>
+>>>>>>> main
 					</p>
 					<%
 					String description = product.getProdInfo();
@@ -78,30 +84,91 @@
 					%>
 					<p class="productinfo"><%=description%>..
 					</p>
-					<p style="color:black;font-size:15px;"class="price">
-						$CAD 
+					<p style="color: black; font-size: 15px;" class="price">
+						<span class="newRibbon">NEW</span>$CAD
 						<%=product.getProdPrice()%>
+						<%
+						if (product.getProdUsedQuantity() > 0) {
+						%>
+						&nbsp;&nbsp;&nbsp; <span class="ribbon">USED</span>$CAD
+						<%=product.getProdUsedPrice()%>
+						<%
+						}
+						%>
+
 					</p>
 					<form method="post">
 						<%
-						if (cartQty == 0) {
+						if (product.getProdUsedQuantity()>0) {
 						%>
-						<button type="submit"
-							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
-							class="btn btn-success">Add to Cart</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="submit"
-							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
-							class="btn btn-primary">Buy Now</button>
+							<%
+							if((cartQty > 0 && cartUsedQty == 0)){
+							%>
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0"
+								class="btn btn-danger">Remove From Cart</button>
+							
+								&nbsp;&nbsp;&nbsp;
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+								class="btn btn-primary">Buy Used</button>
+							<%
+							}else if((cartQty == 0 && cartUsedQty > 0)){
+							%>
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+								class="btn btn-success">Add to Cart</button>
+								
+								&nbsp;&nbsp;&nbsp;
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0"
+								class="btn btn-danger">Remove From Cart</button>
+								
+							<%
+							}else if((cartQty > 0 && cartUsedQty > 0)){
+							%>
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0"
+								class="btn btn-danger">Remove From Cart</button>
+								
+								&nbsp;&nbsp;&nbsp;
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0"
+								class="btn btn-danger">Remove From Cart</button>
+							<%
+							}else  {
+							%>
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+								class="btn btn-success">Add to Cart</button>
+									
+								&nbsp;&nbsp;&nbsp;
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+								class="btn btn-primary">Buy Used</button>
+
+							<%
+							}
+							%>
 						<%
-						} else {
+						}else{	
 						%>
-						<button type="submit"
-							formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0"
-							class="btn btn-danger">Remove From Cart</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="submit" formaction="cartDetails.jsp"
-							class="btn btn-success">Checkout</button>
+							<%
+							if (cartQty == 0) {
+							%>
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1"
+								class="btn btn-success">Add to Cart</button>
+							<%
+							} else {
+							%>
+								<button type="submit"
+								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0"
+								class="btn btn-danger">Remove From Cart</button>
+								
+							<%
+							}
+							%>
 						<%
 						}
 						%>
