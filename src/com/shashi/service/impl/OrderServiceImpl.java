@@ -39,22 +39,39 @@ public class OrderServiceImpl implements OrderService {
 
 		for (CartBean item : cartItems) {
 
-			double amount = new ProductServiceImpl().getProductPrice(item.getProdId()) * item.getQuantity();
+			ProductBean product = new ProductServiceImpl().getProductDetails(item.getProdId());
+			boolean used = item.isUsed();			
+			double discount =  product.getProdDiscountPrice();
+			
+			double pprice;
+			
+			if (used){
+				pprice = product.getProdUsedPrice();
+			} else if (discount > 0){
+				pprice = discount;
+			} else {
+				pprice = product.getProdPrice() ;
+			}
+			
+			double amount = pprice * item.getQuantity();
 
-			OrderBean order = new OrderBean(transactionId, item.getProdId(), item.getQuantity(), amount, item.isUsed());
+			OrderBean order = new OrderBean(transactionId, item.getProdId(), item.getQuantity(), amount, 0, used);
 
 			ordered = addOrder(order);
 			if (!ordered)
 				break;
 			else {
-				ordered = new CartServiceImpl().removeAProduct(item.getUserId(), item.getProdId());
+				ordered = new CartServiceImpl().removeAProduct(item.getUserId(), item.getProdId(), used);
 			}
 
 			if (!ordered)
 				break;
 			else
-				ordered = new ProductServiceImpl().sellNProduct(item.getProdId(), item.getQuantity());
-
+				if (used) {
+					ordered = new ProductServiceImpl().sellNUsedProduct(item.getProdId(), item.getQuantity());
+				}else {
+					ordered = new ProductServiceImpl().sellNProduct(item.getProdId(), item.getQuantity());
+				}
 			if (!ordered)
 				break;
 		}
@@ -183,7 +200,7 @@ public class OrderServiceImpl implements OrderService {
 			while (rs.next()) {
 
 				OrderBean order = new OrderBean(rs.getString("orderid"), rs.getString("prodid"), rs.getInt("quantity"),
-						rs.getDouble("amount"), rs.getInt("shipped"));
+						rs.getDouble("amount"), rs.getInt("shipped"), rs.getBoolean("used"));
 
 				orderList.add(order);
 
@@ -242,7 +259,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 
 			ps = con.prepareStatement(
-					"SELECT  p.pid as prodid, o.orderid as orderid, o.shipped as shipped, p.image as image, p.pname as pname, o.quantity as qty, o.amount as amount, t.time as time FROM orders o, product p, transactions t where o.orderid=t.transid and o.orderid = t.transid and p.pid=o.prodid and t.username=?");
+					"SELECT  p.pid as prodid, o.orderid as orderid, o.shipped as shipped, o.used as used, p.image as image, p.pname as pname, o.quantity as qty, o.amount as amount, t.time as time FROM orders o, product p, transactions t where o.orderid=t.transid and o.orderid = t.transid and p.pid=o.prodid and t.username=?");
 			ps.setString(1, userEmailId);
 			rs = ps.executeQuery();
 
@@ -257,6 +274,7 @@ public class OrderServiceImpl implements OrderService {
 				order.setTime(rs.getTimestamp("time"));
 				order.setProductId(rs.getString("prodid"));
 				order.setShipped(rs.getInt("shipped"));
+				order.setUsed(rs.getBoolean("used"));
 				orderList.add(order);
 
 			}

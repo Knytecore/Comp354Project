@@ -45,14 +45,20 @@ public class UpdateToCart extends HttpServlet {
 		String userId = userName;
 		String prodId = request.getParameter("pid");
 		int pQty = Integer.parseInt(request.getParameter("pqty"));
-
+		boolean used = Boolean.parseBoolean(request.getParameter("used"));
+		
 		CartServiceImpl cart = new CartServiceImpl();
 
 		ProductServiceImpl productDao = new ProductServiceImpl();
 
 		ProductBean product = productDao.getProductDetails(prodId);
 
-		int availableQty = product.getProdQuantity();
+		int availableQty; 
+		if (used) {
+			availableQty = product.getProdUsedQuantity();
+		} else {
+			availableQty = product.getProdQuantity();
+		}
 
 		PrintWriter pw = response.getWriter();
 
@@ -60,9 +66,9 @@ public class UpdateToCart extends HttpServlet {
 
 		if (availableQty < pQty) {
 
-			String status = cart.updateProductToCart(userId, prodId, availableQty);
+			cart.updateProductToCart(userId, prodId, availableQty, used);
 
-			status = "Only " + availableQty + " no of " + product.getProdName()
+			String status = "Only " + availableQty + " no of " + product.getProdName()
 					+ " are available in the shop! So we are adding only " + availableQty + " products into Your Cart"
 					+ "";
 
@@ -83,7 +89,7 @@ public class UpdateToCart extends HttpServlet {
 			pw.println("<script>document.getElementById('message').innerHTML='" + status + "'</script>");
 
 		} else {
-			String status = cart.updateProductToCart(userId, prodId, pQty);
+			String status = cart.updateProductToCart(userId, prodId, pQty, used);
 
 			RequestDispatcher rd = request.getRequestDispatcher("cartDetails.jsp");
 
