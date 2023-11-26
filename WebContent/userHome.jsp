@@ -171,7 +171,7 @@
 							%>
 								<button type="submit"
 								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=false"
-								class="btn btn-success">Add To Cart</button>
+								class="btn btn-success">Add to Cart</button>
 							<%
 							} else {
 							%>
