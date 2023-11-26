@@ -66,6 +66,121 @@
 	<div class="container" style="background-color: #FFFFFF;">
 		<div class="row text-center">
 
+			
+<div class="container1">
+    <!--The row displaying most popular items -->
+    <div class="row">
+        <div class="col-md-12">
+            <% 
+            String category = request.getParameter("type");
+
+            if (category == null) { %>
+                <h2>Most and Least Selling Products</h2>
+                <div class="row">
+                <h3>Most popular Items</h3>
+                    <% 
+                    OrderServiceImpl orderService = new OrderServiceImpl();
+                    List<ProductBean> mostSelling = orderService.getMostSellingItems();
+                    
+                    for (ProductBean product : mostSelling) { %>
+                        <div class="col-sm-4" style="height: 350px;">
+                            <div class="thumbnail">
+                                <img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px;">
+                                <p class="productname" style="font-family:Arial, Helvetica, sans-serif;color:black;font-weight:bold"><%=product.getProdName()%> (<%=product.getProdId()%>)</p>
+                                <p class="productinfo"><%=product.getProdInfo()%></p>
+                                <p class="price" style="color:black; font-size: 15px">$CAD <%=product.getProdPrice()%></p>
+                                <form style="background-color:#FFFFFF;" method="post">
+                                    <button type="submit" formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>" class="btn btn-danger">Remove Product</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button type="submit" formaction="updateProduct.jsp?prodid=<%=product.getProdId()%>" class="btn btn-primary">Update Product</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+                <!-- The row displaying least popular items -->
+                <div class="row">
+                <h3>least popular Items</h3>
+                    <% 
+                    List<ProductBean> leastSelling = orderService.getLeastSellingItems();
+                    
+                    for (ProductBean product : leastSelling) { %>
+                        <div class="col-sm-4" style="height: 350px;">
+                            <div class="thumbnail">
+                                <img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px;">
+                                <p class="productname" style="font-family:Arial, Helvetica, sans-serif;color:black;font-weight:bold"><%=product.getProdName()%> (<%=product.getProdId()%>)</p>
+                                <p class="productinfo"><%=product.getProdInfo()%></p>
+                                <p class="price" style="color:black; font-size: 15px">$CAD <%=product.getProdPrice()%></p>
+                                <form style="background-color:#FFFFFF;" method="post">
+                                    <button type="submit" formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>" class="btn btn-danger">Remove Product</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button type="submit" formaction="updateProduct.jsp?prodid=<%=product.getProdId()%>" class="btn btn-primary">Update Product</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- most and least popular selling items by Category -->
+    <div class="container">
+        <div class="row">
+            <% 
+            String category4 = request.getParameter("type");
+
+            if (category != null) {
+                OrderServiceImpl orderService = new OrderServiceImpl();
+
+                List<ProductBean> mostPopular = orderService.getMostSellingItems(category);
+                List<ProductBean> leastPopular = orderService.getLeastSellingItems(category);
+            %>
+
+            <h3>Best Selling Items for <%= category %></h3>
+            <div class="row">
+                <% for (ProductBean product : mostPopular) { %>
+                    <div class="col-sm-4" style="height: 350px;">
+                        <div class="thumbnail">
+                            <img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px;">
+                            <p class="productname" style="font-family:Arial, Helvetica, sans-serif;color:black;font-weight:bold"><%=product.getProdName()%> (<%=product.getProdId()%>)</p>
+                            <p class="productinfo"><%=product.getProdInfo()%></p>
+                            <p class="price" style="color:black; font-size: 15px">$CAD <%=product.getProdPrice()%></p>
+                            <form style="background-color:#FFFFFF;" method="post">
+                                <button type="submit" formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>" class="btn btn-danger">Remove Product</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="submit" formaction="updateProduct.jsp?prodid=<%=product.getProdId()%>" class="btn btn-primary">Update Product</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+            <h3>Least Selling Items for <%= category %></h3>
+            <div class="row">
+                <% for (ProductBean product : leastPopular) { %>
+                    <div class="col-sm-4" style="height: 350px;">
+                        <div class="thumbnail">
+                            <img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px;">
+                            <p class="productname" style="font-family:Arial, Helvetica, sans-serif;color:black;font-weight:bold"><%=product.getProdName()%> (<%=product.getProdId()%>)</p>
+                            <p class="productinfo"><%=product.getProdInfo()%></p>
+                            <p class="price" style="color:black; font-size: 15px">$CAD <%=product.getProdPrice()%></p>
+                            <form style="background-color:#FFFFFF;" method="post">
+                                <button type="submit" formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>" class="btn btn-danger">Remove Product</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="submit" formaction="updateProduct.jsp?prodid=<%=product.getProdId()%>" class="btn btn-primary">Update Product</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+			
+			<h3>All products</h3>
+			
 			<%
 			for (ProductBean product : products) {
 			%>
@@ -100,6 +215,7 @@
 			%>
 
 		</div>
+	</div>
 	</div>
 	<!-- ENd of Product Items List -->
 

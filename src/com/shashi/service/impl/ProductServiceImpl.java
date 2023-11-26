@@ -19,16 +19,29 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
-			InputStream prodImage) {
+			InputStream prodImage, String prodUsedQuantity) {
 		String status = null;
 		String prodId = IDUtil.generateId();
 
-		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage);
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, prodUsedQuantity);
 
 		status = addProduct(product);
 
 		return status;
 	}
+	
+	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
+			InputStream prodImage, String prodUsedQuantity, int p) {
+		String status = null;
+		String prodId = IDUtil.generateId();
+
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, prodUsedQuantity,p);
+
+		status = addProduct(product);
+
+		return status;
+	}
+	
 
 	@Override
 	public String addProduct(ProductBean product) {
@@ -156,7 +169,7 @@ public class ProductServiceImpl implements ProductService {
 
 		DBUtil.closeConnection(con);
 		DBUtil.closeConnection(ps);
-
+ 
 		return status;
 	}
 

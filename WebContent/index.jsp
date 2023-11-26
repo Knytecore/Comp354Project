@@ -59,9 +59,10 @@
 	<div class="text-center" id="message"
 		style="color: black; font-size: 14px; font-weight: bold;"></div>
 	<!-- Start of Product Items List -->
-	<div class="container">
-		<div class="row text-center">
-
+				<div class="container">
+					<div class="row text-center">
+					<h3>All products</h3>
+		
 			<%
 			for (ProductBean product : products) {
 				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());

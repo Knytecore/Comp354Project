@@ -81,6 +81,17 @@
 					<label for="last_name">Product Description</label>
 					<textarea name="info" class="form-control" id="last_name" required></textarea>
 				</div>
+				
+				<!-- Rest of your existing HTML code -->
+				
+				<div class="form-group">
+				    <label for="product_condition">Product Condition</label>
+				    <select name="Condition" id="product_condition" class="form-control" required>
+				        <option value="new">New</option>
+				        <option value="used">Used</option>
+				    </select>
+				</div>
+				
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="last_name">Unit Price</label> <input type="number"
