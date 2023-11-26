@@ -368,7 +368,6 @@ public class CartServiceImpl implements CartService {
 		return count;
 	}
 
-	@Override
 	public int getCartItemCount(String userId, String itemId, boolean used) {
 		
 		int count = 0;
