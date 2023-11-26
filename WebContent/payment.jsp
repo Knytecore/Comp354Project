@@ -16,7 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #E6F9E6;">
+<body style="background-color: #FFFFFF;">
 
 	<%
 	/* Checking the user credentials */
@@ -46,11 +46,11 @@
 			style="margin-top: 5px; margin-left: 2px; margin-right: 2px;">
 			<form action="./OrderServlet" method="post"
 				class="col-md-6 col-md-offset-3"
-				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
+				style="border: 2px solid black; border-radius: 10px; background-color: #d3d3d3; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
 					<div class="form-group">
 						<img src="images/profile.jpg" alt="Payment Proceed" height="100px" />
-						<h2 style="color: green;">Credit Card Payment</h2>
+						<h2 style="color:#912238;">Credit Card Payment</h2>
 					</div>
 				</div>
 				<div class="row">
@@ -89,8 +89,8 @@
 					</div>
 					<div class="col-md-6 form-group">
 						<label>&nbsp;</label>
-						<button type="submit" class="form-control btn btn-success">
-							Pay :Rs
+						<button style="background-color: #912238;border: 2px #912238;"type="submit" class="form-control btn btn-success">
+							Pay :CAD
 							<%=amount%></button>
 					</div>
 				</div>
