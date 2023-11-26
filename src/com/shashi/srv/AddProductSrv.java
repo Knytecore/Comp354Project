@@ -41,6 +41,8 @@ public class AddProductSrv extends HttpServlet {
 
 			response.sendRedirect("login.jsp?message=Session Expired, Login Again to Continue!");
 		}
+		
+		
 
 		String status = "Product Registration Failed!";
 		String prodName = request.getParameter("name");
@@ -48,6 +50,7 @@ public class AddProductSrv extends HttpServlet {
 		String prodInfo = request.getParameter("info");
 		double prodPrice = Double.parseDouble(request.getParameter("price"));
 		int prodQuantity = Integer.parseInt(request.getParameter("quantity"));
+		String Condition =(request.getParameter("Condition"));
 
 		Part part = request.getPart("image");
 
@@ -56,8 +59,17 @@ public class AddProductSrv extends HttpServlet {
 		InputStream prodImage = inputStream;
 
 		ProductServiceImpl product = new ProductServiceImpl();
+		
+		
+		if(Condition.equals("new")) {
+			
+			status = product.addProduct(prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage,Condition);
+		}
+		else {
+			status = product.addProduct(prodName, prodType, prodInfo, prodPrice,0, prodImage,Condition,prodQuantity);
+		}
 
-		status = product.addProduct(prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage);
+
 
 		RequestDispatcher rd = request.getRequestDispatcher("addProduct.jsp?message=" + status);
 		rd.forward(request, response);
