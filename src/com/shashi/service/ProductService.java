@@ -41,4 +41,6 @@ public interface ProductService {
 	public List<ProductBean> getLowStockProducts();
 	
 	public List<ProductBean> getUsedProductsByType(String type);
+	
+	public List<ProductBean> getDiscountedProductsByType(String type);
 }
