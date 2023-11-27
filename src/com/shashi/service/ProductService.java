@@ -39,4 +39,6 @@ public interface ProductService {
 	public int getProductQuantity(String prodId);
 	
 	public List<ProductBean> getLowStockProducts();
+	
+	public List<ProductBean> getUsedProductsByType(String type);
 }
