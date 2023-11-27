@@ -64,10 +64,10 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 text-center" style="margin-bottom: 2px;">
-						<a href="adminViewProduct.jsp" class="btn btn-info" style="background-color:#912238;">Cancel</a>
+						<a href="adminViewProduct.jsp" class="btn btn-info" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Cancel</a>
 					</div>
 					<div class="col-md-6 text-center">
-						<button type="submit" class="btn btn-danger">Update
+						<button type="submit" class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Update
 							Product</button>
 					</div>
 				</div>

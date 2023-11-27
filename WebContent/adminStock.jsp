@@ -90,14 +90,14 @@
 							<form method="post">
 								<button type="submit"
 									formaction="updateProduct.jsp?prodid=<%=product.getProdId()%>"
-									class="btn btn-primary" style="background-color:#912238;">Update</button>
+									class="btn btn-primary" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Update</button>
 							</form>
 						</td>
 						<td>
 							<form method="post">
 								<button type="submit"
 									formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>"
-									class="btn btn-danger">Remove</button>
+									class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove</button>
 							</form>
 						</td>
 

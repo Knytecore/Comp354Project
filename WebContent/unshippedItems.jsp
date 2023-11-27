@@ -84,7 +84,7 @@
 						<td>READY_TO_SHIP</td>
 						<td><a
 							href="ShipmentServlet?orderid=<%=order.getTransactionId()%>&amount=<%=order.getAmount()%>&userid=<%=userId%>&prodid=<%=order.getProductId()%>"
-							class="btn btn-success" style="background-color:#912238;">SHIP NOW</a></td>
+							class="btn btn-success" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">SHIP NOW</a></td>
 					</tr>
 
 					<%
