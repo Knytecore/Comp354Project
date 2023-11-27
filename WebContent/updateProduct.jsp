@@ -66,13 +66,13 @@
 				</div>
 				<div class="row">
 					<input type="hidden" name="pid" class="form-control"
-						value="<%=product.getProdId()%>" id="last_name" required>
+						value="<%=product.getProdId()%>" id="pid" required>
 				</div>
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="last_name">Product Name</label> <input type="text"
 							placeholder="Enter Product Name" name="name" class="form-control"
-							value="<%=product.getProdName()%>" id="last_name" required>
+							value="<%=product.getProdName()%>" id="name" required>
 					</div>
 					<div class="col-md-6 form-group">
 						<%
@@ -107,20 +107,32 @@
 					<div class="col-md-6 form-group">
 						<label for="last_name">Unit Price</label> <input type="number"
 							value="<%=product.getProdPrice()%>"
-							placeholder="Enter Unit Price" name="price" class="form-control"
-							id="last_name" required>
+							placeholder="Enter Unit Price" name="price" class="form-control" step="any"
+							id="price" required>
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="last_name">Stock Quantity</label> <input type="number"
 							value="<%=product.getProdQuantity()%>"
 							placeholder="Enter Stock Quantity" class="form-control"
-							id="last_name" name="quantity" required>
+							id="quantity" name="quantity" required>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="last_name">Used Unit Price</label> <input type="number"
+							value="<%=product.getProdUsedPrice()%>"
+							placeholder="Enter Used Unit Price" name="usedprice" class="form-control" step="any"
+							id="usedprice" required>
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="last_name">Used Quantity</label> <input type="number"
 							value="<%=product.getProdUsedQuantity()%>"
 							placeholder="Enter Used Quantity" class="form-control"
-							id="last_name" name="used" required>
+							id="used" name="used" required>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="last_name">Discounted Unit Price</label> <input type="number"
+							value="<%=product.getProdDiscountPrice()%>"
+							placeholder="Enter Discounted Unit Price" name="discountprice" class="form-control" step="any"
+							id="discountprice" required>
 					</div>
 				</div>
 				<div class="row text-center">
