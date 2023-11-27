@@ -77,7 +77,8 @@
 						<div class="row">
 							<%
 							OrderServiceImpl orderService = new OrderServiceImpl();
-							List<ProductBean> mostSelling = orderService.getMostSellingItems();
+							String pref = orderService.getPreferenceByUser(userName);
+							List<ProductBean> mostSelling = orderService.getMostSellingItems(pref);
 							for (ProductBean product : mostSelling) {
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
@@ -203,9 +204,10 @@
 						</div>
 						<!-- The row displaying least selling products -->
 						<div class="row">
-							<h3>Least popular Items</h3>
+							<h3>Least Popular Items</h3>
 							<%
-							List<ProductBean> leastSelling = orderService.getLeastSellingItems();
+							
+							List<ProductBean> leastSelling = orderService.getLeastSellingItems(pref);
 
 							for (ProductBean product : leastSelling) {
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
@@ -351,7 +353,7 @@
 						%>
 
 						<h3>
-							most popular Items for
+							Most Popular Items For
 							<%=category%></h3>
 						<div class="row">
 							<%
@@ -480,11 +482,13 @@
 						</div>
 
 						<h3>
-							least popular Items for
+							Least Popular Items For
 							<%=category%></h3>
 						<div class="row">
 							<%
 							for (ProductBean product : leastPopular) {
+								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
+								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
 							%>
 							<div class="col-sm-4" style="height: 350px;">
 								<div class="thumbnail">
@@ -495,9 +499,110 @@
 										(<%=product.getProdId()%>)
 									</p>
 									<p class="productinfo"><%=product.getProdInfo()%></p>
-									<p class="price" style="color: black; font-size: 15px">
-										$CAD
-										<%=product.getProdPrice()%></p>
+									<p style="color: black; font-size: 15px;" class="price">
+
+										<%
+										if (product.getProdDiscountPrice() > 0) {
+										%>
+										<span class="newRibbon">DISCOUNT</span> $CAD
+										<%=product.getProdDiscountPrice()%>
+										<%
+										} else {
+										%>
+										<span class="ribbon">NEW</span> $CAD
+										<%=product.getProdPrice()%>
+										<%
+										}
+										%>
+										<%
+										if (product.getProdUsedQuantity() > 0) {
+										%>
+										&nbsp;&nbsp;&nbsp; <span class="ribbon"
+											style="background-color: #0047AB;">USED</span> $CAD
+										<%=product.getProdUsedPrice()%>
+										<%
+										}
+										%>
+									</p>
+									<form method="post">
+										<%
+										if (product.getProdUsedQuantity() > 0) {
+										%>
+										<%
+										if ((cartQty > 0 && cartUsedQty == 0)) {
+										%>
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=false"
+											class="btn btn-danger">Remove From Cart</button>
+
+										&nbsp;&nbsp;&nbsp;
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=true"
+											class="btn btn-primary">Add Used to Cart</button>
+										<%
+										} else if ((cartQty == 0 && cartUsedQty > 0)) {
+										%>
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=false"
+											class="btn btn-success">Add to Cart</button>
+
+										&nbsp;&nbsp;&nbsp;
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=true"
+											class="btn btn-danger">Remove From Cart</button>
+
+										<%
+										} else if ((cartQty > 0 && cartUsedQty > 0)) {
+										%>
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=false"
+											class="btn btn-danger">Remove From Cart</button>
+
+										&nbsp;&nbsp;&nbsp;
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=true"
+											class="btn btn-danger">Remove From Cart</button>
+										<%
+										} else {
+										%>
+
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=false"
+											class="btn btn-success">Add to Cart</button>
+
+										&nbsp;&nbsp;&nbsp;
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=true"
+											class="btn btn-primary">Add Used to Cart</button>
+
+										<%
+										}
+										%>
+										<%
+										} else {
+										%>
+										<%
+										if (cartQty == 0) {
+										%>
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=1&used=false"
+											class="btn btn-success">Add to Cart</button>
+										<%
+										} else {
+										%>
+										<button type="submit"
+											formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=false"
+											class="btn btn-danger">Remove From Cart</button>
+
+										<%
+										}
+										%>
+										<%
+										}
+										%>
+
+									</form>
+									<br />
 								</div>
 							</div>
 							<% } %>
@@ -506,10 +611,7 @@
 					</div>
 				</div>
 			</div>
-			<h3>All products available</h3>
-
-
-
+			<h3>All Products Available</h3>
 
 			<%
 			for (ProductBean product : products) {
