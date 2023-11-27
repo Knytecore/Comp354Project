@@ -374,9 +374,9 @@ public class OrderServiceImpl implements OrderService {
 				product.setProdPrice(rs.getDouble("pprice"));
 				product.setProdQuantity(rs.getInt("pquantity"));
 				product.setProdImage(rs.getAsciiStream("image"));
-				product.setProdQuantity(rs.getInt("usedpquantity"));
+				product.setProdUsedQuantity(rs.getInt("usedpquantity"));
 				product.setProdUsedPrice(rs.getDouble("usedpprice"));
-				product.setProdUsedPrice(rs.getDouble("discountpprice"));
+				product.setProdDiscountPrice(rs.getDouble("discountpprice"));
 				productList.add(product);
 
 			}
@@ -418,9 +418,9 @@ public class OrderServiceImpl implements OrderService {
 				product.setProdPrice(rs.getDouble("pprice"));
 				product.setProdQuantity(rs.getInt("pquantity"));
 				product.setProdImage(rs.getAsciiStream("image"));
-				product.setProdQuantity(rs.getInt("usedpquantity"));
+				product.setProdUsedQuantity(rs.getInt("usedpquantity"));
 				product.setProdUsedPrice(rs.getDouble("usedpprice"));
-				product.setProdUsedPrice(rs.getDouble("discountpprice"));
+				product.setProdDiscountPrice(rs.getDouble("discountpprice"));
 				productList.add(product);
 
 			}
@@ -460,9 +460,9 @@ public class OrderServiceImpl implements OrderService {
 				product.setProdPrice(rs.getDouble("pprice"));
 				product.setProdQuantity(rs.getInt("pquantity"));
 				product.setProdImage(rs.getAsciiStream("image"));
-				product.setProdQuantity(rs.getInt("usedpquantity"));
+				product.setProdUsedQuantity(rs.getInt("usedpquantity"));
 				product.setProdUsedPrice(rs.getDouble("usedpprice"));
-				product.setProdUsedPrice(rs.getDouble("discountpprice"));
+				product.setProdDiscountPrice(rs.getDouble("discountpprice"));
 				productList.add(product);
 
 			}
@@ -503,9 +503,9 @@ public class OrderServiceImpl implements OrderService {
 				product.setProdPrice(rs.getDouble("pprice"));
 				product.setProdQuantity(rs.getInt("pquantity"));
 				product.setProdImage(rs.getAsciiStream("image"));
-				product.setProdQuantity(rs.getInt("usedpquantity"));
+				product.setProdUsedQuantity(rs.getInt("usedpquantity"));
 				product.setProdUsedPrice(rs.getDouble("usedpprice"));
-				product.setProdUsedPrice(rs.getDouble("discountpprice"));
+				product.setProdDiscountPrice(rs.getDouble("discountpprice"));
 				productList.add(product);
 
 			}

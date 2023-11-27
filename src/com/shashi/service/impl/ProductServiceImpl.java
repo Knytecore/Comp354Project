@@ -610,7 +610,93 @@ public class ProductServiceImpl implements ProductService {
 
 		try {
 			ps = con.prepareStatement("SELECT * FROM product WHERE pquantity <= 3 ");
+			
+			rs = ps.executeQuery();
 
+			while (rs.next()) {
+
+				ProductBean product = new ProductBean();
+
+				product.setProdId(rs.getString(1));
+				product.setProdName(rs.getString(2));
+				product.setProdType(rs.getString(3));
+				product.setProdInfo(rs.getString(4));
+				product.setProdPrice(rs.getDouble(5));
+				product.setProdQuantity(rs.getInt(6));
+				product.setProdImage(rs.getAsciiStream(7));
+				product.setProdUsedQuantity(rs.getInt(8));
+				product.setProdUsedPrice(rs.getDouble(9));
+				product.setProdDiscountPrice(rs.getDouble(10));
+				products.add(product);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(rs);
+
+		return products;
+	}
+	
+	public List<ProductBean> getUsedProductsByType(String type){
+		List<ProductBean> products = new ArrayList<ProductBean>();
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("SELECT * FROM product WHERE usedpquantity > 0 AND ptype=? LIMIT 3");
+			
+			ps.setString(1, type);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				ProductBean product = new ProductBean();
+
+				product.setProdId(rs.getString(1));
+				product.setProdName(rs.getString(2));
+				product.setProdType(rs.getString(3));
+				product.setProdInfo(rs.getString(4));
+				product.setProdPrice(rs.getDouble(5));
+				product.setProdQuantity(rs.getInt(6));
+				product.setProdImage(rs.getAsciiStream(7));
+				product.setProdUsedQuantity(rs.getInt(8));
+				product.setProdUsedPrice(rs.getDouble(9));
+				product.setProdDiscountPrice(rs.getDouble(10));
+				products.add(product);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(rs);
+
+		return products;
+	}
+	
+	public List<ProductBean> getDiscountedProductsByType(String type){
+		List<ProductBean> products = new ArrayList<ProductBean>();
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("SELECT * FROM product WHERE discountpprice > 0 AND ptype=? LIMIT 3");
+			
+			ps.setString(1, type);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
