@@ -140,7 +140,7 @@
 							class="fa fa-plus" style="color:#912238;"></i></a></td>
 					<td><a
 						href="cartDetails.jsp?add=0&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>&used=<%=used%>"><i
-							class="fa fa-minus"></i></a></td>
+							class="fa fa-minus" style="color:#912238"></i></a></td>
 					<td><%=currAmount%></td>
 				</tr>
 

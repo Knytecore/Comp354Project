@@ -113,10 +113,10 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 text-center" style="margin-bottom: 2px;">
-						<button type="reset" class="btn btn-danger">Reset</button>
+						<button type="reset" class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Reset</button>
 					</div>
 					<div class="col-md-6 text-center">
-						<button type="submit" class="btn btn-success" style="background-color:#912238;">Add Product</button>
+						<button type="submit" class="btn btn-success" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Add Product</button>
 					</div>
 				</div>
 			</form>
