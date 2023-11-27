@@ -216,7 +216,7 @@
 							%>
 								<button type="submit"
 								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=false"
-								class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
+								class="btn btn-danger" style="background-color:#A9A9A9;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
 
 								&nbsp;&nbsp;&nbsp;
 								<button type="submit"
@@ -232,19 +232,19 @@
 								&nbsp;&nbsp;&nbsp;
 								<button type="submit"
 								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=true"
-								class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
+								class="btn btn-danger" style="background-color:#A9A9A9;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
 
 							<%
 							}else if((cartQty > 0 && cartUsedQty > 0)){
 							%>
 								<button type="submit"
 								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=false"
-								class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
+								class="btn btn-danger" style="background-color:#A9A9A9;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
 
 								&nbsp;&nbsp;&nbsp;
 								<button type="submit"
 								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=true"
-								class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
+								class="btn btn-danger" style="background-color:#A9A9A9;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
 							<%
 							}else  {
 							%>
@@ -275,7 +275,7 @@
 							%>
 								<button type="submit"
 								formaction="./AddtoCart?uid=<%=userName%>&pid=<%=product.getProdId()%>&pqty=0&used=false"
-								class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
+								class="btn btn-danger" style="background-color:#A9A9A9;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove From Cart</button>
 
 							<%
 							}

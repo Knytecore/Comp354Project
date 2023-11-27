@@ -137,10 +137,10 @@
 				</div>
 				<div class="row text-center">
 					<div class="col-md-4" style="margin-bottom: 2px;">
-						<button formaction="adminViewProduct.jsp" class="btn btn-danger">Cancel</button>
+						<button formaction="adminViewProduct.jsp" class="btn btn-danger" style="border-color:black;border-radius:100px">Cancel</button>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" class="btn btn-success" style="background-color:#912238;">Update
+						<button type="submit" class="btn btn-success" style="background-color:#912238;border-color:black;border-radius:100px">Update
 							Product</button>
 					</div>
 				</div>
