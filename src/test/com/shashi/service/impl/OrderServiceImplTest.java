@@ -10,15 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Arrays;
 
 class OrderServiceImplTest
 {
     @Test
     void getPreferenceByUser()
     {
+        String[] types = {"mobile", "laptop", "tv", "camera", "speaker", "tablet", "fan", "cooler"};
         OrderServiceImpl osi = new OrderServiceImpl();
-        String type = osi.getPreferenceByUser("guest@gmail.com");
-        assertTrue(type == "this" || type == "that");
+        String type_guest = osi.getPreferenceByUser("guest@gmail.com");
+        String type_admin = osi.getPreferenceByUser("admin@gmail.com");
+        List types_list = Arrays.asList(types);
+        assertTrue(types_list.contains(type_guest) && types_list.contains(type_admin));
     }
 
     @Test
