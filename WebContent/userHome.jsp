@@ -379,7 +379,7 @@
 							}
 							%>
 						</div>
-						<!-- The row displaying least selling products -->
+						<!-- The row displaying discounted products -->
 						<div class="row">
 							<h3>Discounted Items</h3>
 							<%
@@ -532,7 +532,7 @@
 							}
 							%>
 						</div>
-						<!-- The row displaying least selling products -->
+						<!-- The row displaying used products -->
 						<div class="row">
 							<h3>Used Items</h3>
 							<%
