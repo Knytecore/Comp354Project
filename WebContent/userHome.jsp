@@ -381,10 +381,16 @@
 						</div>
 						<!-- The row displaying discounted products -->
 						<div class="row">
+							<%
+							List<ProductBean> discountedProducts = productService.getDiscountedProductsByType(preference);
+							if(discountedProducts.isEmpty()){
+									
+							}else{
+							%>
 							<h3>Discounted Items</h3>
 							<%
 							
-							List<ProductBean> discountedProducts = productService.getDiscountedProductsByType(preference);
+							
 
 							for (ProductBean product : discountedProducts) {
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
@@ -531,14 +537,21 @@
 							<%
 							}
 							%>
+							<%
+							}
+							%>
 						</div>
 						<!-- The row displaying used products -->
 						<div class="row">
+							
+							<%
+							List<ProductBean> usedProducts = productService.getUsedProductsByType(preference);
+							if(usedProducts.isEmpty()){
+									
+							}else{
+							%>
 							<h3>Used Items</h3>
 							<%
-							
-							List<ProductBean> usedProducts = productService.getUsedProductsByType(preference);
-
 							for (ProductBean product : usedProducts) {
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
@@ -684,6 +697,10 @@
 							<%
 							}
 							%>
+							<%
+							}
+							%>
+							
 						</div>
 						<%
 						}
