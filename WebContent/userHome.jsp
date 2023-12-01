@@ -64,13 +64,18 @@
 
 
 			<div class="container1">
-				<h2>Most and Least Selling Products</h2>
+				<%
+				String category = request.getParameter("type");
+
+				if (category == null) {
+				%>
+				<h2>Recommended for you</h2>
+				<% } %>
 				<!-- The row displaying most selling products -->
 				<div class="row">
 					<div class="col-md-12">
 						<%
-						String category = request.getParameter("type");
-
+						
 						if (category == null) {
 						%>
 						<h3>Most Popular Items</h3>
@@ -85,7 +90,7 @@
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
 							%>
-							<div class="col-sm-4" style="height: 350px;">
+							<div class="col-sm-4" style="max-height: 400px; overflow-y: auto;">
 								<div class="thumbnail">
 									<img src="./ShowImage?pid=<%=product.getProdId()%>"
 										alt="Product" style="height: 150px; max-width: 180px;">
@@ -237,7 +242,7 @@
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
 							%>
-							<div class="col-sm-4" style="height: 350px;">
+							<div class="col-sm-4" style="height: 400px; overflow-y: auto;">
 								<div class="thumbnail">
 									<img src="./ShowImage?pid=<%=product.getProdId()%>"
 										alt="Product" style="height: 150px; max-width: 180px;">
@@ -383,20 +388,17 @@
 						<div class="row">
 							<%
 							List<ProductBean> discountedProducts = productService.getDiscountedProductsByType(preference);
-							if(discountedProducts.isEmpty()){
-									
-							}else{
-							%>
+							if(discountedProducts.isEmpty()){ %>
+								<h3>Discounted Items</h3>
+								No discounted items in your preferred category.
+							<% } else { %>
 							<h3>Discounted Items</h3>
-							<%
-							
-							
-
+							<%		
 							for (ProductBean product : discountedProducts) {
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
 							%>
-							<div class="col-sm-4" style="height: 350px;">
+							<div class="col-sm-4" style="height: 400px; overflow-y: auto;">
 								<div class="thumbnail">
 									<img src="./ShowImage?pid=<%=product.getProdId()%>"
 										alt="Product" style="height: 150px; max-width: 180px;">
@@ -547,8 +549,11 @@
 							<%
 							List<ProductBean> usedProducts = productService.getUsedProductsByType(preference);
 							if(usedProducts.isEmpty()){
-									
-							}else{
+							%>
+								<h3>Used Items</h3>
+								No used items in your preferred category.
+							<% 
+							} else {
 							%>
 							<h3>Used Items</h3>
 							<%
@@ -556,7 +561,7 @@
 								int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), false);
 								int cartUsedQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId(), true);
 							%>
-							<div class="col-sm-4" style="height: 350px;">
+							<div class="col-sm-4" style="height: 400px; overflow-y: auto;">
 								<div class="thumbnail">
 									<img src="./ShowImage?pid=<%=product.getProdId()%>"
 										alt="Product" style="height: 150px; max-width: 180px;">
@@ -708,7 +713,8 @@
 					</div>
 				</div>
 
-				<!-- Best and Least popular by Category -->
+				<!-- 
+				<!-- Best and Least popular by Category 
 				<div class="container">
 
 					<div class="row">
@@ -1030,6 +1036,7 @@
 						%>
 					</div>
 				</div>
+				 -->
 			</div>
 			<h3>All products available</h3>
 

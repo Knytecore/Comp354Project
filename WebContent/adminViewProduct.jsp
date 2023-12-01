@@ -77,13 +77,13 @@
             if (category == null) { %>
                 <h2>Most and Least Selling Products</h2>
                 <div class="row">
-                <h3>Most popular Items</h3>
+                <h3>Most Popular Items</h3>
                     <% 
                     OrderServiceImpl orderService = new OrderServiceImpl();
                     List<ProductBean> mostSelling = orderService.getMostSellingItems();
                     
                     for (ProductBean product : mostSelling) { %>
-                        <div class="col-sm-4" style="height: 350px;">
+                        <div class="col-sm-4" style="height: 350px; overflow-y:auto">
                             <div class="thumbnail">
                                 <img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px;">
                                 <p class="productname" style="font-family:Arial, Helvetica, sans-serif;color:black;font-weight:bold"><%=product.getProdName()%> (<%=product.getProdId()%>)</p>
@@ -102,12 +102,12 @@
                 </div>
                 <!-- The row displaying least popular items -->
                 <div class="row">
-                <h3>least popular Items</h3>
+                <h3>Least Popular Items</h3>
                     <% 
                     List<ProductBean> leastSelling = orderService.getLeastSellingItems();
                     
                     for (ProductBean product : leastSelling) { %>
-                        <div class="col-sm-4" style="height: 350px;">
+                        <div class="col-sm-4" style="height: 350px; overflow-y:auto">
                             <div class="thumbnail">
                                 <img src="./ShowImage?pid=<%=product.getProdId()%>" alt="Product" style="height: 150px; max-width: 180px;">
                                 <p class="productname" style="font-family:Arial, Helvetica, sans-serif;color:black;font-weight:bold"><%=product.getProdName()%> (<%=product.getProdId()%>)</p>
