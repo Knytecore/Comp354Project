@@ -41,18 +41,19 @@
 		int avail = Integer.parseInt(request.getParameter("avail"));
 		int cartQty = Integer.parseInt(request.getParameter("qty"));
 		CartServiceImpl cart = new CartServiceImpl();
+		boolean used = Boolean.parseBoolean(request.getParameter("used"));
 
 		if (add == 1) {
 			//Add Product into the cart
 			cartQty += 1;
 			if (cartQty <= avail) {
-		cart.addProductToCart(uid, pid, 1, false);
+				cart.addProductToCart(uid, pid, 1, used);
 			} else {
-		response.sendRedirect("./AddtoCart?pid=" + pid + "&pqty=" + cartQty);
+				response.sendRedirect("./AddtoCart?pid=" + pid + "&pqty=" + cartQty + "&used=" + used);
 			}
 		} else if (add == 0) {
 			//Remove Product from the cart
-			cart.removeProductFromCart(uid, pid);
+			cart.removeProductFromCart(uid, pid, used);
 		}
 	}
 	%>
@@ -75,6 +76,7 @@
 				<tr>
 					<th>Picture</th>
 					<th>Products</th>
+					<th>Condition</th>
 					<th>Price</th>
 					<th>Quantity</th>
 					<th>Add</th>
@@ -97,11 +99,25 @@
 					String prodId = item.getProdId();
 
 					int prodQuantity = item.getQuantity();
+					
+					boolean used = item.isUsed();
 
 					ProductBean product = new ProductServiceImpl().getProductDetails(prodId);
-
-					double currAmount = product.getProdPrice() * prodQuantity;
-
+					
+					double discount =  product.getProdDiscountPrice();
+					
+					double currPrice;
+					
+					if (used){
+						currPrice = product.getProdUsedPrice();
+					} else if (discount > 0){
+						currPrice = discount;
+					} else {
+						currPrice = product.getProdPrice() ;
+					}
+					
+					double currAmount = (double) ((int)(currPrice * prodQuantity * 100))/100;
+					
 					totAmount += currAmount;
 
 					if (prodQuantity > 0) {
@@ -111,20 +127,20 @@
 					<td><img src="./ShowImage?pid=<%=product.getProdId()%>"
 						style="width: 50px; height: 50px;"></td>
 					<td><%=product.getProdName()%></td>
-					<td><%=product.getProdPrice()%></td>
+					<td><%= (used ? "Used":"New") %></td>
+					<td><%=currPrice%></td>
 					<td><form method="post" action="./UpdateToCart">
-							<input type="number" name="pqty" value="<%=prodQuantity%>"
-								style="max-width: 70px;" min="0"> <input type="hidden"
-								name="pid" value="<%=product.getProdId()%>"> <input
-								type="submit" name="Update" value="Update"
-								style="max-width: 80px;">
+							<input type="number" name="pqty" value="<%=prodQuantity%>" style="max-width: 70px;" min="0"> 
+							<input type="hidden" name="pid" value="<%=product.getProdId()%>">
+							<input type="hidden" name="used" value="<%=used%>"> 
+							<input type="submit" name="Update" value="Update" style="max-width: 80px;">
 						</form></td>
 					<td><a
-						href="cartDetails.jsp?add=1&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>"><i
+						href="cartDetails.jsp?add=1&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>&used=<%=used%>"><i
 							class="fa fa-plus" style="color:#912238;"></i></a></td>
 					<td><a
-						href="cartDetails.jsp?add=0&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>"><i
-							class="fa fa-minus"></i></a></td>
+						href="cartDetails.jsp?add=0&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>&used=<%=used%>"><i
+							class="fa fa-minus" style="color:#912238"></i></a></td>
 					<td><%=currAmount%></td>
 				</tr>
 
@@ -148,7 +164,7 @@
 								style="background-color: black; color: white;">Cancel</button>
 						</form></td>
 					<td colspan="2" align="center"><form method="post">
-							<button style="background-color: #912238; width:200px; color: white;"
+							<button style="background-color: #d3d3d3; width:200px; color: white;"
 								formaction="payment.jsp?amount=<%=totAmount%>">Pay Now</button>
 						</form></td>
 

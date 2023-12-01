@@ -52,13 +52,20 @@ public class UpdateProductSrv extends HttpServlet {
 		String prodInfo = request.getParameter("info");
 		Double prodPrice = Double.parseDouble(request.getParameter("price"));
 		Integer prodQuantity = Integer.parseInt(request.getParameter("quantity"));
+		Integer prodUsedQuantity = Integer.parseInt(request.getParameter("used"));
+		Double prodUsedPrice = Double.parseDouble(request.getParameter("usedprice"));
+		Double prodDiscountPrice = Double.parseDouble(request.getParameter("discountprice"));
 
 		ProductBean product = new ProductBean();
 		product.setProdId(prodId);
 		product.setProdName(prodName);
 		product.setProdInfo(prodInfo);
 		product.setProdPrice(prodPrice);
+		product.setProdUsedQuantity(prodUsedQuantity);
 		product.setProdQuantity(prodQuantity);
+		product.setProdUsedPrice(prodUsedPrice);
+		product.setProdDiscountPrice(prodDiscountPrice);
+
 		product.setProdType(prodType);
 
 		ProductServiceImpl dao = new ProductServiceImpl();

@@ -19,16 +19,29 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
-			InputStream prodImage) {
+			InputStream prodImage, String prodUsedQuantity) {
 		String status = null;
 		String prodId = IDUtil.generateId();
 
-		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage);
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, prodUsedQuantity);
 
 		status = addProduct(product);
 
 		return status;
 	}
+	
+	public String addProduct(String prodName, String prodType, String prodInfo, double prodPrice, int prodQuantity,
+			InputStream prodImage, String prodUsedQuantity, int p) {
+		String status = null;
+		String prodId = IDUtil.generateId();
+
+		ProductBean product = new ProductBean(prodId, prodName, prodType, prodInfo, prodPrice, prodQuantity, prodImage, prodUsedQuantity,p);
+
+		status = addProduct(product);
+
+		return status;
+	}
+	
 
 	@Override
 	public String addProduct(ProductBean product) {
@@ -156,7 +169,7 @@ public class ProductServiceImpl implements ProductService {
 
 		DBUtil.closeConnection(con);
 		DBUtil.closeConnection(ps);
-
+ 
 		return status;
 	}
 
@@ -597,7 +610,7 @@ public class ProductServiceImpl implements ProductService {
 
 		try {
 			ps = con.prepareStatement("SELECT * FROM product WHERE pquantity <= 3 ");
-
+			
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -627,6 +640,121 @@ public class ProductServiceImpl implements ProductService {
 		DBUtil.closeConnection(rs);
 
 		return products;
+	}
+	
+	public List<ProductBean> getUsedProductsByType(String type){
+		List<ProductBean> products = new ArrayList<ProductBean>();
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("SELECT * FROM product WHERE usedpquantity > 0 AND ptype=? LIMIT 3");
+			
+			ps.setString(1, type);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				ProductBean product = new ProductBean();
+
+				product.setProdId(rs.getString(1));
+				product.setProdName(rs.getString(2));
+				product.setProdType(rs.getString(3));
+				product.setProdInfo(rs.getString(4));
+				product.setProdPrice(rs.getDouble(5));
+				product.setProdQuantity(rs.getInt(6));
+				product.setProdImage(rs.getAsciiStream(7));
+				product.setProdUsedQuantity(rs.getInt(8));
+				product.setProdUsedPrice(rs.getDouble(9));
+				product.setProdDiscountPrice(rs.getDouble(10));
+				products.add(product);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(rs);
+
+		return products;
+	}
+	
+	public List<ProductBean> getDiscountedProductsByType(String type){
+		List<ProductBean> products = new ArrayList<ProductBean>();
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("SELECT * FROM product WHERE discountpprice > 0 AND ptype=? LIMIT 3");
+			
+			ps.setString(1, type);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				ProductBean product = new ProductBean();
+
+				product.setProdId(rs.getString(1));
+				product.setProdName(rs.getString(2));
+				product.setProdType(rs.getString(3));
+				product.setProdInfo(rs.getString(4));
+				product.setProdPrice(rs.getDouble(5));
+				product.setProdQuantity(rs.getInt(6));
+				product.setProdImage(rs.getAsciiStream(7));
+				product.setProdUsedQuantity(rs.getInt(8));
+				product.setProdUsedPrice(rs.getDouble(9));
+				product.setProdDiscountPrice(rs.getDouble(10));
+				products.add(product);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(rs);
+
+		return products;
+	}
+public int getUsedProductQuantity(String prodId)
+	{
+		int quantity = 0;
+
+		Connection con = DBUtil.provideConnection();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement("select * from product where pid=?");
+
+			ps.setString(1, prodId);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				quantity = rs.getInt("usedpquantity");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+
+		return quantity;
 	}
 
 }

@@ -19,10 +19,11 @@ public class ProductBean implements Serializable {
 	private int prodUsedQuantity;
 	private double prodUsedPrice;
 	private double prodDiscountPrice;
+	private String Condition;
 	
 
 	public ProductBean(String prodId, String prodName, String prodType, String prodInfo, double prodPrice,
-			int prodQuantity, InputStream prodImage) {
+			int prodQuantity, InputStream prodImage, String Condition, int prodUsedQuantity) {
 		super();
 		this.prodId = prodId;
 		this.prodName = prodName;
@@ -31,10 +32,43 @@ public class ProductBean implements Serializable {
 		this.prodPrice = prodPrice;
 		this.prodQuantity = prodQuantity;
 		this.prodImage = prodImage;
-		this.prodUsedQuantity = 0;
+		this.prodUsedQuantity = prodUsedQuantity;
+		this.prodUsedPrice = 0.0;
+		this.prodDiscountPrice = 0.0;
+		this.Condition= Condition ;
+	}
+	public ProductBean(String prodId, String prodName, String prodType, String prodInfo, double prodPrice,
+			int prodQuantity,int prodUsedQuantity, InputStream prodImage) {
+		super();
+		this.prodId = prodId;
+		this.prodName = prodName;
+		this.prodType = prodType;
+		this.prodInfo = prodInfo;
+		this.prodPrice = prodPrice;
+		this.prodQuantity = prodQuantity;
+		this.prodImage = prodImage;
+		this.prodUsedQuantity = prodUsedQuantity;
 		this.prodUsedPrice = 0.0;
 		this.prodDiscountPrice = 0.0;
 	}
+
+	
+	public ProductBean(String prodId, String prodName, String prodType, String prodInfo, double prodPrice,
+			int prodQuantity, InputStream prodImage, String Condition) {
+		super();
+		this.prodId = prodId;
+		this.prodName = prodName;
+		this.prodType = prodType;
+		this.prodInfo = prodInfo;
+		this.prodPrice = prodPrice;
+		this.prodQuantity = prodQuantity;
+		this.prodImage = prodImage;
+		this.prodUsedQuantity =0;
+		this.prodUsedPrice = 0.0;
+		this.prodDiscountPrice = 0.0;
+		this.Condition= Condition ;
+	}
+
 	
 	public ProductBean(String prodId, String prodName, String prodType, String prodInfo, double prodPrice,
 			int prodQuantity, InputStream prodImage, int prodUsedQuantity, double prodUsedPrice, double prodDiscountPrice) {
@@ -126,7 +160,7 @@ public class ProductBean implements Serializable {
 	public int getProdUsedQuantity() {
 		return prodUsedQuantity;
 	}
-
+	
 	public void setProdUsedQuantity(int prodUsedQuantity) {
 		this.prodUsedQuantity = prodUsedQuantity;
 	}

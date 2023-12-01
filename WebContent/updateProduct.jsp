@@ -46,18 +46,18 @@
 			style="margin-top: 5px; margin-left: 2px; margin-right: 2px;">
 			<form action="./UpdateProductSrv" method="post"
 				class="col-md-6 col-md-offset-3"
-				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
+				style="border: 2px solid black; border-radius: 10px;background-color: #d3d3d3; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
 					<div class="form-group">
 						<img src="./ShowImage?pid=<%=product.getProdId()%>"
 							alt="Product Image" height="100px" />
-						<h2 style="color: green;">Product Update Form</h2>
+						<h2 style="color: black;">Product Update Form</h2>
 					</div>
 
 					<%
 					if (message != null) {
 					%>
-					<p style="color: blue;">
+					<p style="color: black;">
 						<%=message%>
 					</p>
 					<%
@@ -66,13 +66,13 @@
 				</div>
 				<div class="row">
 					<input type="hidden" name="pid" class="form-control"
-						value="<%=product.getProdId()%>" id="last_name" required>
+						value="<%=product.getProdId()%>" id="pid" required>
 				</div>
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="last_name">Product Name</label> <input type="text"
 							placeholder="Enter Product Name" name="name" class="form-control"
-							value="<%=product.getProdName()%>" id="last_name" required>
+							value="<%=product.getProdName()%>" id="name" required>
 					</div>
 					<div class="col-md-6 form-group">
 						<%
@@ -107,22 +107,40 @@
 					<div class="col-md-6 form-group">
 						<label for="last_name">Unit Price</label> <input type="number"
 							value="<%=product.getProdPrice()%>"
-							placeholder="Enter Unit Price" name="price" class="form-control"
-							id="last_name" required>
+							placeholder="Enter Unit Price" name="price" class="form-control" step="any"
+							id="price" required>
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="last_name">Stock Quantity</label> <input type="number"
 							value="<%=product.getProdQuantity()%>"
 							placeholder="Enter Stock Quantity" class="form-control"
-							id="last_name" name="quantity" required>
+							id="quantity" name="quantity" required>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="last_name">Used Unit Price</label> <input type="number"
+							value="<%=product.getProdUsedPrice()%>"
+							placeholder="Enter Used Unit Price" name="usedprice" class="form-control" step="any"
+							id="usedprice" required>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="last_name">Used Quantity</label> <input type="number"
+							value="<%=product.getProdUsedQuantity()%>"
+							placeholder="Enter Used Quantity" class="form-control"
+							id="used" name="used" required>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="last_name">Discounted Unit Price</label> <input type="number"
+							value="<%=product.getProdDiscountPrice()%>"
+							placeholder="Enter Discounted Unit Price" name="discountprice" class="form-control" step="any"
+							id="discountprice" required>
 					</div>
 				</div>
 				<div class="row text-center">
 					<div class="col-md-4" style="margin-bottom: 2px;">
-						<button formaction="adminViewProduct.jsp" class="btn btn-danger">Cancel</button>
+						<button formaction="adminViewProduct.jsp" class="btn btn-danger" style="border-color:black;border-radius:100px">Cancel</button>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" class="btn btn-success">Update
+						<button type="submit" class="btn btn-success" style="background-color:#912238;border-color:black;border-radius:100px">Update
 							Product</button>
 					</div>
 				</div>

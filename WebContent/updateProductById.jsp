@@ -41,7 +41,7 @@
 			style="margin-top: 5px; margin-left: 2px; margin-right: 2px;">
 			<form action="updateProduct.jsp" method="post"
 				class="col-md-4 col-md-offset-4"
-				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
+				style="border: 2px solid black; border-radius: 10px; background-color: #d3d3d3; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
 					<h3 style="color: black;">Product Update Form</h3>
 					<%
@@ -64,10 +64,10 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 text-center" style="margin-bottom: 2px;">
-						<a href="adminViewProduct.jsp" class="btn btn-info" style="background-color:#912238;">Cancel</a>
+						<a href="adminViewProduct.jsp" class="btn btn-info" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Cancel</a>
 					</div>
 					<div class="col-md-6 text-center">
-						<button type="submit" class="btn btn-danger">Update
+						<button type="submit" class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Update
 							Product</button>
 					</div>
 				</div>

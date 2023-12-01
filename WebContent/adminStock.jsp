@@ -54,6 +54,7 @@
 						<th>Price</th>
 						<th>Sold Qty</th>
 						<th>Stock Qty</th>
+						<th>Used Qty</th> <!--new column for used products-->
 						<th colspan="2" style="text-align: center">Actions</th>
 					</tr>
 				</thead>
@@ -61,18 +62,20 @@
 
 
 
-					<%
-					ProductServiceImpl productDao = new ProductServiceImpl();
-					List<ProductBean> products = new ArrayList<ProductBean>();
-					products = productDao.getAllProducts();
-					for (ProductBean product : products) {
-					%>
-
-					<tr>
+						<% 
+                    ProductServiceImpl productDao = new ProductServiceImpl();
+                    List<ProductBean> products = new ArrayList<ProductBean>();
+                    products = productDao.getAllProducts();
+                    for (ProductBean product : products) {
+                        if (product.getProdQuantity() <= 3) { %>
+                            <tr style="color: red;"> 
+                        <% } else { %>
+                            <tr>
+                        <% } %>
 						<td><img src="./ShowImage?pid=<%=product.getProdId()%>"
 							style="width: 50px; height: 50px;"></td>
 						<td><a
-							href="./updateProduct.jsp?prodid=<%=product.getProdId()%>"><%=product.getProdId()%></a></td>
+							style="color:#588baf;"href="./updateProduct.jsp?prodid=<%=product.getProdId()%>"><%=product.getProdId()%></a></td>
 						<%
 						String name = product.getProdName();
 						name = name.substring(0, Math.min(name.length(), 25)) + "..";
@@ -82,18 +85,19 @@
 						<td><%=product.getProdPrice()%></td>
 						<td><%=new OrderServiceImpl().countSoldItem(product.getProdId())%></td>
 						<td><%=product.getProdQuantity()%></td>
+						<td><%=product.getProdUsedQuantity()%></td> <!--new column for used products-->
 						<td>
 							<form method="post">
 								<button type="submit"
 									formaction="updateProduct.jsp?prodid=<%=product.getProdId()%>"
-									class="btn btn-primary" style="background-color:#912238;">Update</button>
+									class="btn btn-primary" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Update</button>
 							</form>
 						</td>
 						<td>
 							<form method="post">
 								<button type="submit"
 									formaction="./RemoveProductSrv?prodid=<%=product.getProdId()%>"
-									class="btn btn-danger">Remove</button>
+									class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Remove</button>
 							</form>
 						</td>
 

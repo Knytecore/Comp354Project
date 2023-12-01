@@ -18,6 +18,7 @@ public class OrderDetails implements Serializable {
 	private int shipped;
 	private Timestamp time;
 	private InputStream prodImage;
+	private boolean used;
 
 	public String getOrderId() {
 		return orderId;
@@ -81,6 +82,14 @@ public class OrderDetails implements Serializable {
 
 	public void setShipped(int shipped) {
 		this.shipped = shipped;
+	}
+
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 
 }

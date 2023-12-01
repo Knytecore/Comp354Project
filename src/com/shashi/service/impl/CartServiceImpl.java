@@ -158,7 +158,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public String removeProductFromCart(String userId, String prodId) {
+	public String removeProductFromCart(String userId, String prodId, boolean used) {
 		String status = "Product Removal Failed";
 
 		Connection con = DBUtil.provideConnection();
@@ -169,10 +169,11 @@ public class CartServiceImpl implements CartService {
 
 		try {
 
-			ps = con.prepareStatement("select * from usercart where username=? and prodid=?");
+			ps = con.prepareStatement("select * from usercart where username=? and prodid=? and used=?");
 
 			ps.setString(1, userId);
 			ps.setString(2, prodId);
+			ps.setBoolean(3, used);
 
 			rs = ps.executeQuery();
 
@@ -183,26 +184,30 @@ public class CartServiceImpl implements CartService {
 				prodQuantity -= 1;
 
 				if (prodQuantity > 0) {
-					ps2 = con.prepareStatement("update usercart set quantity=? where username=? and prodid=?");
+					ps2 = con.prepareStatement("update usercart set quantity=? where username=? and prodid=? and used=?");
 
 					ps2.setInt(1, prodQuantity);
 
 					ps2.setString(2, userId);
 
 					ps2.setString(3, prodId);
-
+					
+					ps2.setBoolean(4, used);
+					
 					int k = ps2.executeUpdate();
 
 					if (k > 0)
 						status = "Product Successfully removed from the Cart!";
 				} else if (prodQuantity <= 0) {
 
-					ps2 = con.prepareStatement("delete from usercart where username=? and prodid=?");
+					ps2 = con.prepareStatement("delete from usercart where username=? and prodid=? and used=?");
 
 					ps2.setString(1, userId);
 
 					ps2.setString(2, prodId);
-
+					
+					ps2.setBoolean(3, used);
+					
 					int k = ps2.executeUpdate();
 
 					if (k > 0)
@@ -229,7 +234,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public boolean removeAProduct(String userId, String prodId) {
+	public boolean removeAProduct(String userId, String prodId, boolean used) {
 		boolean flag = false;
 
 		Connection con = DBUtil.provideConnection();
@@ -239,10 +244,11 @@ public class CartServiceImpl implements CartService {
 
 		try {
 
-			ps = con.prepareStatement("delete from usercart where username=? and prodid=?");
+			ps = con.prepareStatement("delete from usercart where username=? and prodid=? and used=?");
 			ps.setString(1, userId);
 			ps.setString(2, prodId);
-
+			ps.setBoolean(3, used);
+			
 			int k = ps.executeUpdate();
 
 			if (k > 0)
@@ -260,79 +266,6 @@ public class CartServiceImpl implements CartService {
 		return flag;
 	}
 
-	
-	@Override
-	public String updateProductToCart(String userId, String prodId, int prodQty) {
-
-		String status = "Failed to Add into Cart";
-
-		Connection con = DBUtil.provideConnection();
-
-		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
-		ResultSet rs = null;
-
-		try {
-
-			ps = con.prepareStatement("select * from usercart where username=? and prodid=?");
-
-			ps.setString(1, userId);
-			ps.setString(2, prodId);
-			
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-
-				if (prodQty > 0) {
-					ps2 = con.prepareStatement("update usercart set quantity=? where username=? and prodid=?");
-
-					ps2.setInt(1, prodQty);
-					ps2.setString(2, userId);
-					ps2.setString(3, prodId);
-					
-					int k = ps2.executeUpdate();
-
-					if (k > 0)
-						status = "Product Successfully Updated to Cart!";
-				} else if (prodQty == 0) {
-					ps2 = con.prepareStatement("delete from usercart where username=? and prodid=?");
-
-					ps2.setString(1, userId);
-					ps2.setString(2, prodId);
-					
-					int k = ps2.executeUpdate();
-
-					if (k > 0)
-						status = "Product Successfully Updated in Cart!";
-				}
-			} else {
-
-				ps2 = con.prepareStatement("insert into usercart values(?,?,?,false)");
-
-				ps2.setString(1, userId);
-				ps2.setString(2, prodId);
-				ps2.setInt(3, prodQty);
-				
-				int k = ps2.executeUpdate();
-
-				if (k > 0)
-					status = "Product Successfully Updated to Cart!";
-
-			}
-
-		} catch (SQLException e) {
-			status = "Error: " + e.getMessage();
-			e.printStackTrace();
-		}
-
-		DBUtil.closeConnection(con);
-		DBUtil.closeConnection(ps);
-		DBUtil.closeConnection(rs);
-		DBUtil.closeConnection(ps2);
-
-		return status;
-	}
-	
 	
 	public String updateProductToCart(String userId, String prodId, int prodQty, boolean used) {
 
@@ -410,7 +343,7 @@ public class CartServiceImpl implements CartService {
 	}
 	
 
-	public int getProductCount(String userId, String prodId) {
+	public int getProductCount(String userId, String prodId, Boolean used) {
 		int count = 0;
 
 		Connection con = DBUtil.provideConnection();
@@ -419,9 +352,10 @@ public class CartServiceImpl implements CartService {
 		ResultSet rs = null;
 
 		try {
-			ps = con.prepareStatement("select sum(quantity) from usercart where username=? and prodid=?");
+			ps = con.prepareStatement("select sum(quantity) from usercart where username=? and prodid=? and used=?");
 			ps.setString(1, userId);
 			ps.setString(2, prodId);
+			ps.setBoolean(3, used);
 			rs = ps.executeQuery();
 
 			if (rs.next() && !rs.wasNull())
@@ -433,9 +367,8 @@ public class CartServiceImpl implements CartService {
 
 		return count;
 	}
-
 	@Override
-	public int getCartItemCount(String userId, String itemId) {
+	public int getCartItemCount(String userId, String itemId, boolean used) {
 		
 		int count = 0;
 		if (userId == null || itemId == null)
@@ -444,13 +377,14 @@ public class CartServiceImpl implements CartService {
 
 		PreparedStatement ps = null;
 
-		ResultSet rs = null;
+		ResultSet rs = null; 
 
 		try {
-			ps = con.prepareStatement("select quantity from usercart where username=? and prodid=?");
+			ps = con.prepareStatement("select quantity from usercart where username=? and prodid=? and used=?");
 
 			ps.setString(1, userId);
 			ps.setString(2, itemId);
+			ps.setBoolean(3, used);
 			
 			rs = ps.executeQuery();
 
@@ -468,4 +402,9 @@ public class CartServiceImpl implements CartService {
 
 		return count;
 	}
+
+
+
+	
+	
 }

@@ -44,7 +44,7 @@
 			style="margin-top: 5px; margin-left: 2px; margin-right: 2px;">
 			<form action="./AddProductSrv" method="post"
 				enctype="multipart/form-data" class="col-md-6 col-md-offset-3"
-				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
+				style="border: 2px solid black; border-radius: 10px; background-color: #d3d3d3; padding: 10px;">
 				<div style="font-weight: bold;" class="text-center">
 					<h2 style="color: black;">Product Addition Form</h2>
 					<%
@@ -81,6 +81,17 @@
 					<label for="last_name">Product Description</label>
 					<textarea name="info" class="form-control" id="last_name" required></textarea>
 				</div>
+				
+				<!-- Rest of your existing HTML code -->
+				
+				<div class="form-group">
+				    <label for="product_condition">Product Condition</label>
+				    <select name="Condition" id="product_condition" class="form-control" required>
+				        <option value="new">New</option>
+				        <option value="used">Used</option>
+				    </select>
+				</div>
+				
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="last_name">Unit Price</label> <input type="number"
@@ -102,10 +113,10 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 text-center" style="margin-bottom: 2px;">
-						<button type="reset" class="btn btn-danger">Reset</button>
+						<button type="reset" class="btn btn-danger" style="background-color:#CC2A2E;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Reset</button>
 					</div>
 					<div class="col-md-6 text-center">
-						<button type="submit" class="btn btn-success" style="background-color:#912238;">Add Product</button>
+						<button type="submit" class="btn btn-success" style="background-color:#912238;border-color:black;border-radius:100px;font-weight:500;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">Add Product</button>
 					</div>
 				</div>
 			</form>
